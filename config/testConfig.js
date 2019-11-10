@@ -20,7 +20,9 @@ var Config = async function (accounts) {
 
     let owner = testAddresses[0];
 
-    let emitOracle = await EmitOracle.new({ from: owner });
+    //let emitOracle = await EmitOracle.new({ from: owner });
+    let emitOracle = await EmitOracle.deployed();
+
 
 
     return {

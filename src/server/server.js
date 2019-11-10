@@ -16,7 +16,7 @@ contract.events.evHelloOracle(
       console.log("error")
     }
     if (event) {
-      console.log("hello")
+      console.log("event")
     }
   }
 );
