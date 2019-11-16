@@ -1,7 +1,4 @@
-# Oracletest
-test interaction between smart contracts and oracle.
-
-```plantuml
+@startuml
 actor user
 boundary dApp
 control EmitOracle
@@ -23,16 +20,4 @@ alt found
 else not found
     Oracle -> dApp : return error
 end
-```
-
-*TODO*
-
-- スマートコントラクトEmitOracleとやりとりするdAPpの実装
-- スマートコントラクトEmitOracle側での署名処理
-- Oracleサーバー側でのイベントパラメータ値の取り出し
-- Oracleサーバー側でのsqllite3への保存
-- dAppによるOracleサーバーAPIの呼び出し
-- Oracleサーバー側でのAPIの実装
-
-
-![](npxcreatereactappdapp.png)
+@enduml

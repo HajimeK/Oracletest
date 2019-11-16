@@ -1,15 +1,26 @@
 pragma solidity >=0.5.0 <0.6.0;
 
 contract EmitOracle {
-    event evHelloOracle(string _message);
-
-    function helloOracle()
+    event evError();
+    event evStoreMessageHash(address, bytes32);
+    function storeMessageHash(
+            bytes32 msgHash,
+            uint8 v,
+            bytes32 r,
+            bytes32 s)
         external
     {
-        bytes memory b = new bytes(20);
-        for (uint i = 0; i < 20; i++)
-            b[i] = byte(uint8(uint(msg.sender) / (2**(8*(19 - i)))));
-
-        emit evHelloOracle(string(b));
+        bytes memory garbagePrefix = "\x19Ethereum Signed Message:\n32";
+        bytes32 hash = keccak256(
+            abi.encodePacked(
+                garbagePrefix,
+                msgHash));
+        address addr = ecrecover(hash, v, r, s);
+        //emit evRecoveredAddress(addr);
+        if (addr == msg.sender) {
+            emit evStoreMessageHash(addr, msgHash);
+        } else {
+            emit evError();
+        }
     }
 }
