@@ -15,33 +15,58 @@ import {
 class MyComponent extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props);
+    //console.log(props);
     //console.log(props);
   }
 
   componentDidMount() {
-    console.log(this.props);
-    const { drizzleStatus, EmitOracle, accounts } = this.props;
+    //mwconsole.log(this.props);
+    //const { drizzleStatus, EmitOracle, accounts } = this.props;
   }
 
-  handleStoreMessage = e => {
+  handleStoreMessage = async e => {
     //console.log('handleRegisterAirline');
     const message = document.getElementById('message');
     //console.log(message.value);
     //console.log(string(accountToRegister));
 
-    const { drizzle, accounts } = this.props;
+    const { drizzle } = this.props;
+    const { accounts } = this.props.drizzleState;
     //const { accounts } = this.props.drizzleState;
     console.log(drizzle);
-    console.log(accounts[0]);
+    console.log(accounts);
+    console.log(message.value);
+    let hash = drizzle.web3.utils.sha3(message.value);
+    console.log(hash);
+    let signature = await drizzle.web3.eth.sign(hash, accounts[0]);
+    signature = signature.substr(2); //remove 0x
+    const r = '0x' + signature.slice(0, 64);
+    const s = '0x' + signature.slice(64, 128);
+    let v = '0x' + signature.slice(128, 130);
+    if (v === '0x00') {
+      v = '0x1b';
+    } else if (v === '0x01') {
+      v = '0x1c';
+    }
 
-    drizzle.contracts.EmitOracle.methods.storeMessage(
-      message.value,
-      accounts[0]).send({
+    console.log("Signature");
+    console.log("r: " + r);
+    console.log("s: " + s);
+    console.log("v: " + v);
+    const v_decimal = drizzle.web3.utils.toDecimal(v);
+    console.log("v_decimal: " + v_decimal);
+
+    await drizzle.contracts.EmitOracle.methods.storeMessageHash(
+      hash,
+      v,
+      r,
+      s)
+      .send({
         from: accounts[0],
         gas: 4712388,
         gasPrice: 100000000000
       });
+    console.log("sent");
   }
 
   handleRetrieveMessage = e => {

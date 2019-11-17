@@ -5,19 +5,9 @@ control EmitOracle
 control Oracle
 
 autonumber "<b>[000]"
-user -> dApp : Send Message
+user -> dApp : Write message to store
 dApp -> dApp : sign the message
 dApp -> EmitOracle : send the message and the signature
 EmitOracle -> EmitOracle : Recover the sender address
 EmitOracle -> Oracle : send the address and the mssage
-Oracle -> Oracle : Store (address, message) in DB
-...
-user -> dApp : extract the message
-dApp -> Oracle : (API) extract emssage by the account adddres
-Oracle -> Oracle : search the message by the account address
-alt found
-    Oracle -> dApp : show the message
-else not found
-    Oracle -> dApp : return error
-end
 @enduml

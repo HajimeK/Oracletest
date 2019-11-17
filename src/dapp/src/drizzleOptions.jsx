@@ -11,7 +11,7 @@ const options = {
   },
   contracts: [EmitOracle],
   events: {
-    EmitOraclee: ["evError", "evStoreMessageHash"],
+    EmitOracle: ["evError", "evStoreMessageHash"],
   },
   polls: {
     accounts: 1500,

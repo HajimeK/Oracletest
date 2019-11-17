@@ -17,10 +17,6 @@ contract EmitOracle {
                 msgHash));
         address addr = ecrecover(hash, v, r, s);
         //emit evRecoveredAddress(addr);
-        if (addr == msg.sender) {
-            emit evStoreMessageHash(addr, msgHash);
-        } else {
-            emit evError();
-        }
+        emit evStoreMessageHash(addr, msgHash);
     }
 }

@@ -36,3 +36,13 @@ end
 
 
 ![](npxcreatereactappdapp.png)
+
+
+署名時に以下のPopupが表示される
+
+![](signaturewarning.png)
+
+eventが発行されました
+
+
+![](eventpopup.png)

@@ -26,6 +26,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "http": "0.0.0",
+    "sqlite3": "^4.1.0",
     "start-server-webpack-plugin": "^2.2.5",
     "web3": "^1.2.2",
     "webpack": "^4.41.2"

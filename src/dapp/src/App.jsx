@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     const { drizzle } = this.props;
-    console.log(this);
+    //cofnsole.log(this);
 
     // subscribe to changes in the store
     this.unsubscribe = drizzle.store.subscribe(() => {

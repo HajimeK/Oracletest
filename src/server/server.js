@@ -1,4 +1,4 @@
-import EmitOracle from '../../build/contracts/EmitOracle.json';
+import EmitOracle from '../dapp/src/contracts/EmitOracle.json';
 import Config from './config.json';
 import Web3 from 'web3';
 import express from 'express';
